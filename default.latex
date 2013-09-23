@@ -1,4 +1,4 @@
-\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
+\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$,margin]{res}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
@@ -39,13 +39,14 @@ $if(geometry)$
 \usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
 $endif$
 $if(natbib)$
-\usepackage{natbib}
-\bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
+\providecommand\makeindex{}
+\usepackage[numbers]{natbib}
+\bibliographystyle{utphys}
 $endif$
 $if(biblatex)$
-\usepackage{biblatex}
-$if(biblio-files)$
-\bibliography{$biblio-files$}
+\usepackage[style=numeric]{biblatex}
+$if(bibliography)$
+\addbibresource{$bibliography$}
 $endif$
 $endif$
 $if(listings)$
@@ -111,8 +112,10 @@ $if(strikeout)$
 \pdfstringdefDisableCommands{\renewcommand{\sout}{}}
 $endif$
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\sectionskip}{20pt}
+\setlength{\parskip}{2pt}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
+\setlength{\sectionwidth}{80pt}
 $if(numbersections)$
 \setcounter{secnumdepth}{5}
 $else$
@@ -133,18 +136,21 @@ $for(header-includes)$
 $header-includes$
 $endfor$
 
+\let\oldsection=\section
+\newcommand\scsection[1]{\oldsection{\sc #1}}
+\makeatletter\renewcommand\section{\@ifstar\scsection\scsection}\makeatother
 $if(title)$
 \title{$title$}
 $endif$
 $if(subtitle)$
 \subtitle{$subtitle$}
 $endif$
-\author{$for(author)$$author$$sep$ \and $endfor$}
+\name{$for(author)$$author$$sep$ \and $endfor$}
 \date{$date$}
 
 \begin{document}
 $if(title)$
-\maketitle
+% \maketitle
 $endif$
 
 $for(include-before)$
@@ -158,10 +164,12 @@ $if(toc)$
 \tableofcontents
 }
 $endif$
+\begin{resume}
 $body$
-
+\end{resume}
+\nocite{*}
 $if(natbib)$
-$if(biblio-files)$
+$if(bibliography)$
 $if(biblio-title)$
 $if(book-class)$
 \renewcommand\bibname{$biblio-title$}
@@ -169,7 +177,7 @@ $else$
 \renewcommand\refname{$biblio-title$}
 $endif$
 $endif$
-\bibliography{$biblio-files$}
+\bibliography{$bibliography$}
 
 $endif$
 $endif$
