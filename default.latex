@@ -191,5 +191,5 @@ $include-after$
 
 $endfor$
 \vspace\itemsep
-My publications can also be found on \href{http://inspirehep.net/search?ln=en\&p=exactauthor\%3AM.Moskovic.1\&of=hb\&action_search=Search}{\textsc{INSPIRE}}.
+My publications can also be found on \href{$inspire-url$}{\textsc{INSPIRE}}.
 \end{document}
