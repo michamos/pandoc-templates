@@ -113,7 +113,7 @@ $if(strikeout)$
 \pdfstringdefDisableCommands{\renewcommand{\sout}{}}
 $endif$
 \setlength{\parindent}{0pt}
-\setlength{\sectionskip}{20pt}
+\setlength{\sectionskip}{15pt}
 \setlength{\parskip}{2pt}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \setlength{\sectionwidth}{80pt}
@@ -146,7 +146,7 @@ $endif$
 $if(subtitle)$
 \subtitle{$subtitle$}
 $endif$
-\name{\LARGE $for(author)$$author$$sep$ \and $endfor$}
+\name{\huge $for(author)$$author$$sep$ \and $endfor$}
 \date{$date$}
 
 \begin{document}
@@ -190,4 +190,6 @@ $for(include-after)$
 $include-after$
 
 $endfor$
+\vspace\itemsep
+My publications can also be found on \href{http://inspirehep.net/search?ln=en\&p=exactauthor\%3AM.Moskovic.1\&of=hb\&action_search=Search}{\textsc{INSPIRE}}.
 \end{document}
