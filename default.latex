@@ -148,7 +148,7 @@ $endif$
 $if(subtitle)$
 \subtitle{$subtitle$}
 $endif$
-\name{{\huge $for(author)$$author$$sep$ \and $endfor$}$if(title)$\\[5pt]\hfill\huge $title$$endif$}
+\name{{\huge $for(author)$$author$$sep$ \and $endfor$}$if(title)$\\[5pt]\hfil\huge $title$\hfil$endif$}
 \date{$date$}
 
 \begin{document}
