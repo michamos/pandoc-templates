@@ -13,29 +13,39 @@ $endif$
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <link rel="stylesheet" href="$revealjs-url$/css/reveal.min.css"/>
-    <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="$revealjs-url$/css/reveal.css"/>
+  <style type="text/css">code{white-space: pre;}</style>
 $if(highlighting-css)$
-    <style type="text/css">
+  <style type="text/css">
 $highlighting-css$
-    </style>
+  </style>
 $endif$
-$if(css)$
-$for(css)$
-    <link rel="stylesheet" href="$css$"/>
-$endfor$
+$if(theme)$
+  <link rel="stylesheet" href="$revealjs-url$/css/theme/$theme$.css" id="theme">
 $else$
-    <link rel="stylesheet" href="$revealjs-url$/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="$revealjs-url$/css/theme/black.css" id="theme">
 $endif$
-  <link rel="stylesheet" media="print" href="$revealjs-url$/css/print/pdf.css" />
+$for(css)$
+  <link rel="stylesheet" href="$css$"/>
+$endfor$
+  <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+  <script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = '$revealjs-url$/css/print/pdf.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+  </script>
   <!--[if lt IE 9]>
   <script src="$revealjs-url$/lib/js/html5shiv.js"></script>
   <![endif]-->
 $if(math)$
-    $math$
+  $math$
 $endif$
 $for(header-includes)$
-    $header-includes$
+  $header-includes$
 $endfor$
 </head>
 <body>
@@ -66,22 +76,22 @@ $endif$
 $body$
     </div>
   </div>
-$for(include-after)$
-$include-after$
-$endfor$
+
 
   <script src="$revealjs-url$/lib/js/head.min.js"></script>
-  <script src="$revealjs-url$/js/reveal.min.js"></script>
+  <script src="$revealjs-url$/js/reveal.js"></script>
 
   <script>
 
       // Full list of configuration options available here:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
-        controls: true,
-        progress: true,
-        history: true,
-        center: true,
+        controls: true,         // Display controls in the bottom right corner
+        progress: true,         // Display a presentation progress bar
+        history: true,          // Push each slide change to the browser history
+        center: $if(center)$$center$$else$false$endif$,                       // Vertical centering of slides
+        maxScale: $if(maxScale)$$maxScale$$else$1.5$endif$,                  // Bounds for smallest/largest possible content scale
+        slideNumber: $if(slideNumber)$true$else$false$endif$,                // Display the page number of the current slide
         theme: $if(theme)$'$theme$'$else$Reveal.getQueryHash().theme$endif$, // available themes are in /css/theme
         transition: $if(transition)$'$transition$'$else$Reveal.getQueryHash().transition || 'default'$endif$, // default/cube/page/concave/zoom/linear/fade/none
 
@@ -94,5 +104,8 @@ $endfor$
 //          { src: '$revealjs-url$/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
 ]});
     </script>
+  $for(include-after)$
+  $include-after$
+  $endfor$
   </body>
 </html>
