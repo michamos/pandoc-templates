@@ -1,7 +1,6 @@
 \documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{res}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-$endif$
 $if(linestretch)$
 \usepackage{setspace}
 \setstretch{$linestretch$}
@@ -9,6 +8,10 @@ $endif$
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
 \usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\setlist[description]{style=unboxed,before={%
+\setlist[itemize]{topsep=0pt,before=\item[]}%
+}}
 \usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
@@ -59,7 +62,6 @@ $endif$
 \else
   \usepackage[unicode=true]{hyperref}
 \fi
-\usepackage[usenames,dvipsnames]{color}
 \hypersetup{breaklinks=true,
             bookmarks=true,
             pdfauthor={$author-meta$},
@@ -127,7 +129,7 @@ $if(strikeout)$
 \pdfstringdefDisableCommands{\renewcommand{\sout}{}}
 $endif$
 \setlength{\parindent}{0pt}
-\setlength{\sectionskip}{15pt}
+\setlength{\sectionskip}{20pt}
 \setlength{\parskip}{2pt}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 $if(classoption)$
